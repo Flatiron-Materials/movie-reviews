@@ -6,8 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-apikey = "c01df668"
-
 movies = [
     "Star Wars",
     "Lord of the Rings",
@@ -20,15 +18,24 @@ movies = [
     "Memento"
 ]
 
-    def request_movie(apikey, movie_title)
-        request = RestClient.get "http://www.omdbapi.com/?apikey=#{apikey}&t=#{movie_title}&plot=full"
+    def request_movie(movie_title)
+        request = RestClient.get "http://www.omdbapi.com/?apikey=c01df668&t=#{movie_title}&plot=full"
         api_hash = JSON.parse(request)
     end
 
-    def build_movie(api_hash)
-        title = api_hash["Title"]
-        year = api_hash["Year"]
-        release_date = api_hash["Released"]
-        plot = api_hash["Plot"]
-        Movie.create(title: title, year: year, release_date: release_date, plot: plot)
+    def create_movie(movie_title)
+        api_hash = request_movie(movie_title)
+        attributes = {}
+        attributes[:title] = api_hash["Title"]
+        attributes[:year] = api_hash["Year"]
+        attributes[:rating] = api_hash["Rated"]
+        attributes[:release_date] = api_hash["Released"]
+        attributes[:runtime] = api_hash["Runtime"]
+        attributes[:genre] = api_hash["Genre"]
+        attributes[:plot] = api_hash["Plot"]
+        attributes[:awards] = api_hash["Awards"]
+        attributes[:poster_url] = api_hash["Poster"]
+        Movie.create(attributes)
     end
+
+    movies.each {|movie| create_movie(movie)}
