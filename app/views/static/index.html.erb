@@ -1,1 +1,16 @@
 <h1>Welcome to Movie Reviews!</h1>
+
+<%= form_with model: @user do |f| %>
+    <div>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+    </div>
+    <div>
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+    </div>
+    <div>
+        <%= f.submit "Login" %>
+        <%= f.button link_to "Sign Up", new_user_path %>
+    </div>
+<% end %>
