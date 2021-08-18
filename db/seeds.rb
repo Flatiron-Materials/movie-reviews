@@ -20,12 +20,15 @@ movies = [
     "Memento"
 ]
 
-request = RestClient.get "http://www.omdbapi.com/?apikey=#{apikey}&s=#{movie_title}"
+    def request_movie(apikey, movie_title)
+        request = RestClient.get "http://www.omdbapi.com/?apikey=#{apikey}&t=#{movie_title}&plot=full"
+        api_hash = JSON.parse(request)
+    end
 
-    def put_titles
-        movies.each do |movie_title|
-            request = RestClient.get "http://www.omdbapi.com/?apikey=c01df668&t=#{movie_title}"
-            hash = JSON.parse(request)
-            puts "#{hash["Title"]}, released #{hash["Released"]}"
-        end
+    def build_movie(api_hash)
+        title = api_hash["Title"]
+        year = api_hash["Year"]
+        release_date = api_hash["Released"]
+        plot = api_hash["Plot"]
+        Movie.create(title: title, year: year, release_date: release_date, plot: plot)
     end
