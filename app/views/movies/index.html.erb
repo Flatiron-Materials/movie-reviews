@@ -1,0 +1,7 @@
+<h1>All Movies</h1>
+
+<% @movies.sort_by(&:title).each do |movie| %>
+    <div>
+        <%= link_to movie.title, movie %>
+    </div>
+<% end %>
