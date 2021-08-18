@@ -1,1 +1,9 @@
-<h1><%= @movie.title %> </h1>
+<h1> <%= @movie.title %> - <%=@movie.year%> </h1>
+
+<img src="<%=@movie.poster_url%>" alt="<%=@movie.title%>-poster">
+<p>Rated: <%=@movie.rating%></p>
+<p>Release Date: <%=@movie.release_date%></p>
+<p>Runtime: <%=@movie.runtime%></p>
+<p>Genre: <%=@movie.genre%></p>
+<p>Plot: <%=@movie.plot%></p>
+<p>Awards: <%=@movie.awards%></p>
