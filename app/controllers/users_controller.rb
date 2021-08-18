@@ -2,11 +2,11 @@ class UsersController < ApplicationController
     def index
     end
 
-    def def new
+    def new
         @user = User.new
     end
 
-    def def create
+    def create
         @user = User.new(user_params)
         if @user.save
           flash[:success] = "User successfully created"
@@ -18,6 +18,7 @@ class UsersController < ApplicationController
     end
     
     def show
+        @user = User.find(params[:id])
     end
 
     private
