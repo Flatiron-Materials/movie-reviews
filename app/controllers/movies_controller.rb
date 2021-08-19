@@ -5,7 +5,9 @@ class MoviesController < ApplicationController
     end
 
     def new
-        if params[:title]
+        if !helpers.logged_in?
+            redirect_to "/"
+        elsif params[:title]
             @movies = []
             search_movies(params[:title]).each do |movie_hash|
                 movie = new_movie(movie_hash)

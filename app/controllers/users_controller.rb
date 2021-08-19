@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
     def index
+      if !helpers.logged_in?
+        redirect_to "/"
+      end
     end
 
     def new
@@ -14,16 +17,19 @@ class UsersController < ApplicationController
           redirect_to @user
         else
           flash[:error] = "Something went wrong"
-          render 'new'
+          redirect_to 'new'
         end
     end
     
     def show
-        @user = User.find(params[:id])
+      if !helpers.logged_in?
+        redirect_to "/"
+      end
+        @user = helpers.current_user
     end
 
     private
-
+  
     def user_params
       params.require(:user).permit(:name, :password)
     end

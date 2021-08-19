@@ -8,5 +8,7 @@ Rails.application.routes.draw do
   get '/', to:'static#index'
 
   post '/', to:'sessions#create'
+
+  get '/logout', to:'sessions#destroy'
   
 end
