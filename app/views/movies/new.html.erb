@@ -1,0 +1,22 @@
+<h1> Submit a New Movie </h1>
+
+<% if @movies %>
+    Select the correct movie
+    <% @movies.each do |movie| %>
+        <div>
+            <b><%= movie.title %> - <%= movie.year %></b> 
+            <%= button_to "Select", movies_path, params: {title: movie.title} %> <br>
+            
+            <img src="<%= movie.poster_url%>" alt="<%= movie.title %> poster">
+        </div>
+    <% end %>
+<% else %>
+    <%= form_with model: @movie, url: new_movie_path, method: "get" do |f|%>
+    <div>
+        <%= f.label :title %>
+        <%= f.text_field :title%>
+    </div>
+    <%= f.submit %>
+<% end %>
+<% end %>
+

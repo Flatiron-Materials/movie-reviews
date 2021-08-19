@@ -10,4 +10,11 @@ Top 5
 
 <div>
 Review a movie
+<%= form_with model: @movie, url: new_movie_path, method: "get" do |f|%>
+    <div>
+        <%= f.label :title %>
+        <%= f.text_field :title%>
+    </div>
+    <%= f.submit %>
+<% end %>
 </div>
