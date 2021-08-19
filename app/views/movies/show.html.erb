@@ -1,5 +1,6 @@
 <h1> <%= @movie.title %> - <%=@movie.year%> </h1>
 
+<%= button_to "Review", new_review_path, method: "get" %>
 <img src="<%=@movie.poster_url%>" alt="<%=@movie.title%>-poster">
 <p>Rated: <%=@movie.rating%></p>
 <p>Release Date: <%=@movie.release_date%></p>

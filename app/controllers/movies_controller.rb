@@ -21,8 +21,11 @@ class MoviesController < ApplicationController
         @movie = new_movie(find_movie(params[:title]))
         if @movie.save
             redirect_to movie_path(@movie)
+        elsif Movie.find_by(title: params[:title])
+            @movie = Movie.find_by(title: params[:title])
+            redirect_to movie_path(@movie)
         else
-            redirect_to user_path(current_user)
+            redirect_to user_path(helpers.current_user)
         end
     end
 

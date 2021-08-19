@@ -13,7 +13,12 @@ Review a movie
 <%= form_with model: @movie, url: new_movie_path, method: "get" do |f|%>
     <div>
         <%= f.label :title %>
-        <%= f.text_field :title%>
+        <input list="movies" name="title" id="title">
+        <datalist id="movies">
+            <%= Movie.all.each do |movie| %>
+                <option value = "<%= movie.title %>">
+            <% end %>
+        </datalist>
     </div>
     <%= f.submit %>
 <% end %>
