@@ -1,15 +1,14 @@
 <h1> Welcome, <%=@user.name%> </h1>
 
 <div>
-Reviewed Movies
+<h3>Reviewed Movies</h3>
+<% @user.movies.each do |movie| %>
+    <div><%= link_to movie.title, movie %></div>
+<% end %>
 </div>
 
 <div>
-Top 5
-</div>
-
-<div>
-Review a movie
+<h3>Review a movie</h3>
 <%= form_with model: @movie, url: new_movie_path, method: "get" do |f|%>
     <div>
         <%= f.label :title %>
@@ -20,6 +19,6 @@ Review a movie
             <% end %>
         </datalist>
     </div>
-    <%= f.submit %>
+    <%= f.submit "Find Movie" %>
 <% end %>
 </div>

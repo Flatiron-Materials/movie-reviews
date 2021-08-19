@@ -1,1 +1,14 @@
 <h1>New Review</h1>
+
+<img src="<%=@movie.poster_url%>" alt="<%=@movie.title%> poster">
+<h3>Write your review for <%= @movie.title %>:</h3>
+<%= form_with model: @review do |f| %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.hidden_field :movie_id, value: @movie.id %>
+    <div>
+        <%= f.label :content %>
+        <%= f.text_area :content %>
+    </div>
+    <br>
+    <%= f.submit %>
+<% end %>

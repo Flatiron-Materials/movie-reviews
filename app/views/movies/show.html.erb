@@ -1,6 +1,6 @@
 <h1> <%= @movie.title %> - <%=@movie.year%> </h1>
 
-<%= button_to "Review", new_review_path, method: "get" %>
+<%= button_to "Review", new_review_path, method: "get", params: {movie_id: @movie.id} %>
 <img src="<%=@movie.poster_url%>" alt="<%=@movie.title%>-poster">
 <p>Rated: <%=@movie.rating%></p>
 <p>Release Date: <%=@movie.release_date%></p>
@@ -8,3 +8,9 @@
 <p>Genre: <%=@movie.genre%></p>
 <p>Plot: <%=@movie.plot%></p>
 <p>Awards: <%=@movie.awards%></p>
+
+<h3>Reviews:</h3>
+<% @movie.reviews.each do |review| %>
+    <i><%= review.content %></i> <br>
+    -<%= link_to review.user.name, user_path(review.user) %>
+<% end %>
